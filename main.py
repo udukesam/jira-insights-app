@@ -11,6 +11,7 @@ app = FastAPI()
 JIRA_SERVER = os.environ.get("JIRA_SERVER")
 JIRA_EMAIL = os.environ.get("JIRA_EMAIL")
 JIRA_API_TOKEN = os.environ.get("JIRA_API_TOKEN")
+JIRA_PROJECT = os.environ.get("JIRA_PROJECT")
 
 
 def get_jira_client():
@@ -85,7 +86,7 @@ def get_work_estimates():
     jira = get_jira_client()
     
     try:
-        jql_query = "project = CFESTG"
+        jql_query = f"project = {JIRA_PROJECT}"
         issues = jira.search_issues(jql_query, maxResults=1000)
 
         results = []
@@ -146,7 +147,7 @@ def get_work_efforts():
     jira = get_jira_client()
 
     try:
-        jql_query = "project = CFESTG"
+        jql_query = f"project = {JIRA_PROJECT}"
         issues = jira.search_issues(jql_query, maxResults=100)
 
         results = []
@@ -191,13 +192,13 @@ def filter_by_criteria(
     status: Optional[str] = Query(None)
 ):
     """
-    Retrieves Jira issues from project CFESTG filtered by optional priority, severity, and status.
+    Retrieves Jira issues from JIRA project filtered by optional priority, severity, and status.
     """
     jira = get_jira_client()
 
     try:
         # Build JQL dynamically
-        jql_parts = ["project = CFESTG"]
+        jql_parts = [f"project = {JIRA_PROJECT}"]
         if priority:
             jql_parts.append(f'priority = "{priority}"')
         if severity:
@@ -233,7 +234,7 @@ def filter_by_criteria(
 @app.get("/jira/insights/delivery", response_model=DeliveryMetrics)
 def get_delivery_metrics():
     """
-    Computes delivery metrics for the CFESTG Jira project.
+    Computes delivery metrics for the Jira project.
     Metrics include:
     - Total issues
     - Completed (Done) issues
@@ -243,7 +244,7 @@ def get_delivery_metrics():
     jira = get_jira_client()
 
     try:
-        jql_query = "project = CFESTG"
+        jql_query = f"project = {JIRA_PROJECT}"
         issues = jira.search_issues(jql_query, maxResults=1000)
 
         total_issues = len(issues)
@@ -336,7 +337,7 @@ def get_sprint_insights():
     jira = get_jira_client()
     try:
         # You can adjust the project key here as needed
-        jql_query = "project = CFESTG"
+        jql_query = f"project = {JIRA_PROJECT}"
         issues = jira.search_issues(jql_query, maxResults=1000)
 
         total_stories = len(issues)
