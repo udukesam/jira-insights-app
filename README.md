@@ -45,6 +45,7 @@ Before running the app, set the following environment variables:
 | `JIRA_EMAIL` | Your JIRA user email |
 | `JIRA_API_TOKEN` | API token generated from your Atlassian account |
 | `JIRA_PROJECT` | Your JIRA project name |
+
 Example:
 ```bash
 export JIRA_SERVER="https://yourcompany.atlassian.net"
@@ -76,7 +77,7 @@ docker build -t fastapi-jira-insights .
 
 ### 2️⃣ Run the container
 ```bash
-docker run -d   -p 8080:8080   -e JIRA_SERVER="https://yourcompany.atlassian.net"   -e JIRA_EMAIL="user@example.com"   -e JIRA_API_TOKEN="your_api_token_here"   fastapi-jira-insights
+docker run -d   -p 8080:8080   -e JIRA_SERVER="https://yourcompany.atlassian.net"   -e JIRA_EMAIL="user@example.com"   -e JIRA_API_TOKEN="your_api_token_here"   -e JIRA_PROJECT="your_jira_project_name_here" fastapi-jira-insights
 ```
 
 The API will be available at:
