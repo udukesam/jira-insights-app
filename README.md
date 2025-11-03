@@ -44,12 +44,14 @@ Before running the app, set the following environment variables:
 | `JIRA_SERVER` | JIRA server URL (e.g. `https://yourcompany.atlassian.net`) |
 | `JIRA_EMAIL` | Your JIRA user email |
 | `JIRA_API_TOKEN` | API token generated from your Atlassian account |
-
+| `JIRA_PROJECT` | Your JIRA project name |
 Example:
 ```bash
 export JIRA_SERVER="https://yourcompany.atlassian.net"
 export JIRA_EMAIL="user@example.com"
 export JIRA_API_TOKEN="your_api_token_here"
+export JIRA_PROJECT="your_jira_project_name_here"
+
 ```
 
 ---
